@@ -12,9 +12,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={jost.className}>
+      <body className={`${jost.className} flex`}>
         <Navbar />
-        {children}
+        <main className="ml-[622px] overflow-y-scroll">{children}</main>
       </body>
     </html>
   );

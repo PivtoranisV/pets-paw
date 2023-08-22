@@ -12,7 +12,7 @@ const Navbar = () => {
   const currentRoute = usePathname();
 
   return (
-    <header className="flex flex-col pl-[147px] pt-[30px]">
+    <header className="flex flex-col pl-[147px] pt-[30px] fixed left-0 top-0">
       <div className="flex gap-2">
         <Image src={logo} alt="logo" />
         <Image src={petsPaw} alt="logo" />
