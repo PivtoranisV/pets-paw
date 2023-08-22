@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import petsPaw from '../public/PetsPaw-2.svg';
-import logo from '../public/Group 20.svg';
-import voteTable from '../public/vote-table-2.png';
+import petsPaw from '../public/petsPaw.svg';
+import logo from '../public/group.svg';
+import voteTable from '../public/voteTable.png';
 import cat from '../public/cat.png';
 import hand from '../public/hand.png';
 
@@ -23,24 +23,48 @@ const Navbar = () => {
         </p>
       </div>
       <div className="flex gap-4">
-        <Link
-          href="/"
-          className="bg-[#B4B7FF] h-[198px] w-[138px] border-solid border-4 rounded-[20px] border-[#FFFFFF99] flex flex-col items-center justify-center"
-        >
-          <div></div>
-          <Image
-            src={voteTable}
-            alt="vote table"
-            className="w-[100px] h-[124.468px]"
-          />
-          <div></div>
+        <Link href="/" className="flex flex-col gap-[10px]">
+          <div className="bg-[#B4B7FF] h-[198px] w-[138px] border-solid border-4 rounded-[20px] border-[#FFFFFF99] flex flex-col items-center justify-center">
+            <Image
+              src={voteTable}
+              alt="vote table"
+              className="w-[100px] h-[124.468px]"
+            />
+          </div>
+          <div className="h-[36px] w-[138px] rounded-[10px] bg-[#FFFFFF1A] flex flex-col items-center justify-center">
+            <span className="text-sm text-secondary font-medium tracking-[2px]">
+              VOTING
+            </span>
+          </div>
         </Link>
-        <div className="bg-[#97EAB9] h-[198px] w-[138px] border-solid border-4 rounded-[20px] border-[#FFFFFF99] flex items-center justify-center">
-          <Image src={cat} alt="vote table" className="w-[117px] h-[163px]" />
-        </div>
-        <div className="bg-[#FFD280] h-[198px] w-[138px] border-solid border-4 rounded-[20px] border-[#FFFFFF99] flex items-center justify-center">
-          <Image src={hand} alt="vote table" className="w-[112px] h-[190px]" />
-        </div>
+        <Link href="/" className="flex flex-col gap-[10px]">
+          <div className="bg-[#97EAB9] h-[198px] w-[138px] border-solid border-4 rounded-[20px] border-[#FFFFFF99] flex flex-col items-center justify-center">
+            <Image
+              src={cat}
+              alt="vote table"
+              className="w-[100px] h-[124.468px]"
+            />
+          </div>
+          <div className="h-[36px] w-[138px] rounded-[10px] bg-[#FFFFFF1A] flex flex-col items-center justify-center">
+            <span className="text-sm text-secondary font-medium tracking-[2px]">
+              VOTING
+            </span>
+          </div>
+        </Link>
+        <Link href="/" className="flex flex-col gap-[10px]">
+          <div className="bg-[#FFD280] h-[198px] w-[138px] border-solid border-4 rounded-[20px] border-[#FFFFFF99] flex flex-col items-center justify-center">
+            <Image
+              src={hand}
+              alt="vote table"
+              className="w-[100px] h-[124.468px]"
+            />
+          </div>
+          <div className="h-[36px] w-[138px] rounded-[10px] bg-[#FFFFFF1A] flex flex-col items-center justify-center">
+            <span className="text-sm text-secondary font-medium tracking-[2px]">
+              VOTING
+            </span>
+          </div>
+        </Link>
       </div>
     </header>
   );
