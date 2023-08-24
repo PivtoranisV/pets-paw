@@ -47,7 +47,7 @@ const Navbar = () => {
             }`}
           >
             <span
-              className={`text-sm  font-medium tracking-[2px] ${
+              className={`text-sm font-medium tracking-[2px] ${
                 currentRoute === '/voting' ? 'text-white' : 'text-secondary'
               }`}
             >
