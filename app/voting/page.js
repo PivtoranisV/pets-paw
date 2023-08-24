@@ -1,12 +1,27 @@
 'use client';
 import Image from 'next/image';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useState, useEffect } from 'react';
+
 import SearchBar from '@/components/SearchBar';
 import arrow from '../../public/arrowLeft.svg';
 
+const apiKey = process.env.API_KEY;
+
 const Voting = () => {
   const router = useRouter();
+  const [randomCat, setRandomCat] = useState(null);
+
+  useEffect(() => {
+    const fetchCat = async () => {
+      const response = await fetch(
+        'https://api.thecatapi.com/v1/images/search?api_key=' + apiKey
+      );
+      const data = await response.json();
+      setRandomCat(data);
+    };
+    fetchCat();
+  }, []);
 
   return (
     <div className="w-[680px] ml-[108px] mt-[30px]">
@@ -21,6 +36,22 @@ const Voting = () => {
           <div className="h-[40px] w-[146px] rounded-[10px] flex flex-col items-center justify-center bg-secondary">
             <span className="text-base font-medium tracking-[2px]">VOTING</span>
           </div>
+        </div>
+        <div className="mt-[25px]">
+          {randomCat ? (
+            <div className="w-[640px] h-[360px] relative">
+              <Image
+                src={randomCat[0].url}
+                fill
+                alt="cat"
+                className="object-cover"
+              />
+            </div>
+          ) : (
+            <p className="text-base font-medium tracking-[2px] text-primary text-center pt-9">
+              Cat image is loading....
+            </p>
+          )}
         </div>
       </div>
     </div>
