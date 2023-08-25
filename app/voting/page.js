@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 
 import SearchBar from '@/components/SearchBar';
 import arrow from '../../public/arrowLeft.svg';
+import UserAction from '@/components/UserAction';
 
 const apiKey = process.env.API_KEY;
 
@@ -53,6 +54,7 @@ const Voting = () => {
             </p>
           )}
         </div>
+        <UserAction />
       </div>
     </div>
   );
