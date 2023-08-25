@@ -24,7 +24,8 @@ const DUMMY_LOGS = [
   },
 ];
 
-const UserAction = () => {
+const UserAction = ({ catId }) => {
+  console.log(catId);
   return (
     <div className="flex flex-col mt-[-38px] z-20 relative gap-[14px]">
       <div className="bg-[#282828] flex h-20 gap-1 rounded-[20px] mx-auto">

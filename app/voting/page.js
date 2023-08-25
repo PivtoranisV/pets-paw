@@ -7,19 +7,34 @@ import SearchBar from '@/components/SearchBar';
 import arrow from '../../public/arrowLeft.svg';
 import UserAction from '@/components/UserAction';
 
+const ImageLoader = ({ isLoading }) => {
+  if (isLoading) {
+    return (
+      <p className="text-base font-medium tracking-[2px] text-primary text-center">
+        Cat image is loading...
+      </p>
+    );
+  }
+
+  return null;
+};
+
 const apiKey = process.env.API_KEY;
 
 const Voting = () => {
   const router = useRouter();
   const [randomCat, setRandomCat] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
     const fetchCat = async () => {
       const response = await fetch(
         'https://api.thecatapi.com/v1/images/search?api_key=' + apiKey
       );
       const data = await response.json();
-      setRandomCat(data);
+      setRandomCat(data[0]);
+      setIsLoading(false);
     };
     fetchCat();
   }, []);
@@ -39,22 +54,19 @@ const Voting = () => {
           </div>
         </div>
         <div className="mt-[25px]">
-          {randomCat ? (
-            <div className="h-[360px] relative">
+          <ImageLoader isLoading={isLoading} />
+          <div className="h-[360px] relative w-full">
+            {randomCat && (
               <Image
-                src={randomCat[0].url}
+                src={randomCat.url}
                 fill
                 alt="cat"
                 className="object-cover"
               />
-            </div>
-          ) : (
-            <p className="text-base font-medium tracking-[2px] text-primary text-center pt-9">
-              Cat image is loading....
-            </p>
-          )}
+            )}
+          </div>
         </div>
-        <UserAction />
+        <UserAction catId={randomCat?.id} />
       </div>
     </div>
   );
