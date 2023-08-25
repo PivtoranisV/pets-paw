@@ -24,9 +24,9 @@ const Voting = () => {
   }, []);
 
   return (
-    <div className="w-[680px] ml-[108px] mt-[30px]">
+    <div className="ml-[108px] mt-[30px]">
       <SearchBar />
-      <div className="w-[680px] h-[782px] bg-background rounded-[20px] p-5 mt-[10px]">
+      <div className="h-[782px] bg-background rounded-[20px] p-5 mt-[10px]">
         <div className="flex gap-[10px]">
           <button type="button" onClick={() => router.back()}>
             <div className="w-[40px] h-[40px] bg-[#FF868E33] flex items-center justify-center rounded-[10px]">
@@ -39,7 +39,7 @@ const Voting = () => {
         </div>
         <div className="mt-[25px]">
           {randomCat ? (
-            <div className="w-[640px] h-[360px] relative">
+            <div className="h-[360px] relative">
               <Image
                 src={randomCat[0].url}
                 fill
