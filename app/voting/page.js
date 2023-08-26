@@ -4,21 +4,10 @@ import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 
 import SearchBar from '@/components/SearchBar';
+import ImageLoader from '@/components/ImageLoader';
 import arrow from '../../public/arrowLeft.svg';
 import UserAction from '@/components/UserAction';
 import { fetchCat } from '@/util';
-
-const ImageLoader = ({ isLoading }) => {
-  if (isLoading) {
-    return (
-      <p className="text-base font-medium tracking-[2px] text-primary text-center">
-        Cat image is loading...
-      </p>
-    );
-  }
-
-  return null;
-};
 
 const Voting = () => {
   const router = useRouter();
