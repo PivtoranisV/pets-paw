@@ -9,6 +9,8 @@ import dislikeYellow from '../public/dislike-yellow.svg';
 import favRed from '../public/fav-red.svg';
 import { getCurrentTime } from '@/util';
 import { fetchCat } from '@/util';
+import { sendVote } from '@/util';
+import { sendFavorite } from '@/util';
 
 const UserAction = ({ catId, setRandomCat }) => {
   const [userLogs, setUserLogs] = useState([]);
@@ -24,6 +26,8 @@ const UserAction = ({ catId, setRandomCat }) => {
 
     const catData = await fetchCat();
     setRandomCat(catData);
+
+    sendVote(catId, 1);
   };
 
   const dislikeHandler = async () => {
@@ -37,7 +41,10 @@ const UserAction = ({ catId, setRandomCat }) => {
 
     const catData = await fetchCat();
     setRandomCat(catData);
+
+    sendVote(catId, 0);
   };
+
   const favHandler = async () => {
     const newLog = {
       id: catId,
@@ -49,6 +56,8 @@ const UserAction = ({ catId, setRandomCat }) => {
 
     const catData = await fetchCat();
     setRandomCat(catData);
+
+    sendFavorite(catId);
   };
 
   return (
@@ -56,21 +65,21 @@ const UserAction = ({ catId, setRandomCat }) => {
       <div className="bg-[#282828] flex h-20 gap-1 rounded-[20px] mx-auto">
         <button
           type="button"
-          className="bg-[#97EAB9] w-[82px] flex flex-col items-center justify-center rounded-l-[20px]"
+          className="bg-[#97EAB9] hover:brightness-125 w-[82px] flex flex-col items-center justify-center rounded-l-[20px]"
           onClick={likeHandler}
         >
           <Image src={likeIcon} alt="like icon" />
         </button>
         <button
           type="button"
-          className="bg-[#FF868E] w-[82px] flex flex-col items-center justify-center"
+          className="bg-[#FF868E] hover:brightness-125 w-[82px] flex flex-col items-center justify-center"
           onClick={favHandler}
         >
           <Image src={favIcon} alt="favorite icon" />
         </button>
         <button
           type="button"
-          className="bg-[#FFD280] w-[82px] flex flex-col items-center justify-center rounded-r-[20px]"
+          className="bg-[#FFD280] hover:brightness-125 w-[82px] flex flex-col items-center justify-center rounded-r-[20px]"
           onClick={dislikeHandler}
         >
           <Image src={dislikeIcon} alt="dislike icon" />
