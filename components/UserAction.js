@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 import likeIcon from '../public/like-white.svg';
@@ -8,14 +7,7 @@ import favIcon from '../public/fav-white.svg';
 import likeGreen from '../public/like-green.svg';
 import dislikeYellow from '../public/dislike-yellow.svg';
 import favRed from '../public/fav-red.svg';
-
-const getCurrentTime = () => {
-  const now = new Date();
-  const hours = now.getHours();
-  const minutes = now.getMinutes();
-  const time = `${hours}:${minutes}`;
-  return time;
-};
+import { getCurrentTime } from '@/util';
 
 const UserAction = ({ catId }) => {
   const [userLogs, setUserLogs] = useState([]);

@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import SearchBar from '@/components/SearchBar';
 import arrow from '../../public/arrowLeft.svg';
 import UserAction from '@/components/UserAction';
+import { fetchCat } from '@/util';
 
 const ImageLoader = ({ isLoading }) => {
   if (isLoading) {
@@ -19,8 +20,6 @@ const ImageLoader = ({ isLoading }) => {
   return null;
 };
 
-const apiKey = process.env.API_KEY;
-
 const Voting = () => {
   const router = useRouter();
   const [randomCat, setRandomCat] = useState(null);
@@ -28,15 +27,17 @@ const Voting = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    const fetchCat = async () => {
-      const response = await fetch(
-        'https://api.thecatapi.com/v1/images/search?api_key=' + apiKey
-      );
-      const data = await response.json();
-      setRandomCat(data[0]);
-      setIsLoading(false);
+    const fetchRandomCat = async () => {
+      try {
+        const catData = await fetchCat();
+        setRandomCat(catData);
+      } catch (error) {
+        console.error('Error fetching cat:', error);
+      } finally {
+        setIsLoading(false);
+      }
     };
-    fetchCat();
+    fetchRandomCat();
   }, []);
 
   return (
