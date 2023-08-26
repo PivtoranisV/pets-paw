@@ -43,7 +43,7 @@ const Voting = () => {
   return (
     <div className="ml-[108px] mt-[30px]">
       <SearchBar />
-      <div className="h-[782px] bg-background rounded-[20px] p-5 mt-[10px]">
+      <div className="bg-background rounded-[20px] p-5 mt-[10px]">
         <div className="flex gap-[10px]">
           <button type="button" onClick={() => router.back()}>
             <div className="w-[40px] h-[40px] bg-[#FF868E33] flex items-center justify-center rounded-[10px]">
@@ -67,7 +67,7 @@ const Voting = () => {
             )}
           </div>
         </div>
-        <UserAction catId={randomCat?.id} />
+        <UserAction catId={randomCat?.id} setRandomCat={setRandomCat} />
       </div>
     </div>
   );

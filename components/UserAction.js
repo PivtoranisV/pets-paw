@@ -8,11 +8,12 @@ import likeGreen from '../public/like-green.svg';
 import dislikeYellow from '../public/dislike-yellow.svg';
 import favRed from '../public/fav-red.svg';
 import { getCurrentTime } from '@/util';
+import { fetchCat } from '@/util';
 
-const UserAction = ({ catId }) => {
+const UserAction = ({ catId, setRandomCat }) => {
   const [userLogs, setUserLogs] = useState([]);
 
-  const likeHandler = () => {
+  const likeHandler = async () => {
     const newLog = {
       id: catId,
       time: getCurrentTime(),
@@ -20,9 +21,12 @@ const UserAction = ({ catId }) => {
       icon: likeGreen,
     };
     setUserLogs([...userLogs, newLog]);
+
+    const catData = await fetchCat();
+    setRandomCat(catData);
   };
 
-  const dislikeHandler = () => {
+  const dislikeHandler = async () => {
     const newLog = {
       id: catId,
       time: getCurrentTime(),
@@ -30,8 +34,11 @@ const UserAction = ({ catId }) => {
       icon: dislikeYellow,
     };
     setUserLogs([...userLogs, newLog]);
+
+    const catData = await fetchCat();
+    setRandomCat(catData);
   };
-  const favHandler = () => {
+  const favHandler = async () => {
     const newLog = {
       id: catId,
       time: getCurrentTime(),
@@ -39,6 +46,9 @@ const UserAction = ({ catId }) => {
       icon: favRed,
     };
     setUserLogs([...userLogs, newLog]);
+
+    const catData = await fetchCat();
+    setRandomCat(catData);
   };
 
   return (
