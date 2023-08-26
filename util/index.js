@@ -17,6 +17,15 @@ export const fetchCat = async () => {
   return data[0];
 };
 
+export const fetchBreeds = async () => {
+  const response = await fetch(
+    'https://api.thecatapi.com/v1/images/search?breed_ids=beng&limit=10&api_key=' +
+      apiKey
+  );
+  const data = await response.json();
+  return data.map((image) => image.url);
+};
+
 export const sendVote = async (imageId, voteType) => {
   try {
     const response = await fetch('https://api.thecatapi.com/v1/votes', {
