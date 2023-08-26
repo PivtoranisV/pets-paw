@@ -57,16 +57,18 @@ const Breeds = () => {
         </div>
         <div className="mt-[25px]">
           <ImageLoader isLoading={isLoading} />
-          {/* <div className="h-[360px] relative w-full">
-            {randomCat && (
+          <div className="grid grid-cols-3 gap-5">
+            {breeds?.map((breed) => (
               <Image
-                src={randomCat.url}
-                fill
-                alt="cat"
-                className="object-cover"
+                src={breed.url}
+                key={breed.id}
+                alt="cat image"
+                width={300}
+                height={140}
+                className="rounded-[10px]"
               />
-            )}
-          </div> */}
+            ))}
+          </div>
         </div>
       </div>
     </div>

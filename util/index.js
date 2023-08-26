@@ -23,7 +23,7 @@ export const fetchBreeds = async () => {
       apiKey
   );
   const data = await response.json();
-  return data.map((image) => image.url);
+  return data;
 };
 
 export const sendVote = async (imageId, voteType) => {
