@@ -17,6 +17,7 @@ module.exports = {
         md: ['16px', '24px'],
         base: ['20px', '30px'],
         lg: ['44px', '58px'],
+        larger: ['36px', '52px'],
       },
       colors: {
         primary: '#8C8C8C',

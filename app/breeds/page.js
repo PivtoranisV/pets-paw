@@ -40,7 +40,7 @@ const Breeds = () => {
     const breedName = breed.breeds[0].name.toLowerCase();
     return breedName.includes(selectedBreed.toLowerCase());
   });
-  console.log(filteredBreedCats);
+
   return (
     <div className="ml-[108px] mt-[30px]">
       <SearchBar />

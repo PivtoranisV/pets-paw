@@ -50,7 +50,7 @@ const BreedDetail = ({ params }) => {
         </div>
         <div className="mt-[25px]">
           <ImageLoader isLoading={isLoading} />
-          <div className="h-[360px] relative w-full">
+          <div className="h-[360px] relative w-full mb-6">
             {breedDetails && (
               <Image
                 src={breedDetails[0].url}
@@ -61,6 +61,39 @@ const BreedDetail = ({ params }) => {
             )}
           </div>
         </div>
+        <fieldset className="border-2 border-[#FF868E33] rounded-[20px] pb-10 mb-[75px]">
+          <legend className="text-center px-[40px] mb-[49px] text-larger">
+            {breedDetails && breedDetails[0].breeds[0].name}
+          </legend>
+          <div className="flex text-md font-normal justify-between px-10">
+            <div>
+              <h2 className="font-medium">Temperament:</h2>
+              <p className="text-primary">
+                {breedDetails && breedDetails[0].breeds[0].temperament}
+              </p>
+            </div>
+            <div className="font-normal">
+              <h2 className="font-medium">
+                Origin:{' '}
+                <span className="text-primary">
+                  {breedDetails && breedDetails[0].breeds[0].origin}
+                </span>
+              </h2>
+              <h2 className="font-medium">
+                Weight:{' '}
+                <span className="text-primary">
+                  {breedDetails && breedDetails[0].breeds[0].weight.metric} kgs
+                </span>
+              </h2>
+              <h2 className="font-medium">
+                Life span:{' '}
+                <span className="text-primary">
+                  {breedDetails && breedDetails[0].breeds[0].life_span} years
+                </span>
+              </h2>
+            </div>
+          </div>
+        </fieldset>
       </div>
     </div>
   );
