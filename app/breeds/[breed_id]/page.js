@@ -6,6 +6,8 @@ import arrow from '../../../public/arrowLeft.svg';
 import SearchBar from '@/components/SearchBar';
 import ImageLoader from '@/components/ImageLoader';
 import { fetchBreedId } from '@/util';
+import { Carousel } from 'react-responsive-carousel';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 const BreedDetail = ({ params }) => {
   const router = useRouter();
@@ -50,16 +52,26 @@ const BreedDetail = ({ params }) => {
         </div>
         <div className="mt-[25px]">
           <ImageLoader isLoading={isLoading} />
-          <div className="h-[360px] relative w-full mb-6">
-            {breedDetails && (
-              <Image
-                src={breedDetails[0].url}
-                fill
-                alt="cat"
-                className="object-cover"
-              />
-            )}
-          </div>
+          <Carousel
+            showThumbs={false}
+            showStatus={false}
+            infiniteLoop={true}
+            showArrows={false}
+          >
+            {breedDetails?.map((breed) => (
+              <div
+                key={breed.url}
+                className="rounded-[20px] overflow-hidden h-[360px] relative w-full mb-6"
+              >
+                <Image
+                  src={breed.url}
+                  alt="cat"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            ))}
+          </Carousel>
         </div>
         <fieldset className="border-2 border-[#FF868E33] rounded-[20px] pb-10 mb-[75px]">
           <legend className="text-center px-[40px] mb-[49px] text-larger">
