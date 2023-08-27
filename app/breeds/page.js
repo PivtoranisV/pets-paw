@@ -8,6 +8,7 @@ import ImageLoader from '@/components/ImageLoader';
 import arrow from '../../public/arrowLeft.svg';
 import { fetchBreedsCats } from '@/util';
 import FilterBreeds from '@/components/FilterBreeds';
+import Link from 'next/link';
 
 const Breeds = () => {
   const router = useRouter();
@@ -39,7 +40,7 @@ const Breeds = () => {
     const breedName = breed.breeds[0].name.toLowerCase();
     return breedName.includes(selectedBreed.toLowerCase());
   });
-
+  console.log(filteredBreedCats);
   return (
     <div className="ml-[108px] mt-[30px]">
       <SearchBar />
@@ -64,20 +65,24 @@ const Breeds = () => {
           <ImageLoader isLoading={isLoading} />
           <div className="grid grid-cols-3 gap-5">
             {filteredBreedCats?.map((breed) => (
-              <div className="relative" key={breed.id}>
+              <Link
+                className="relative"
+                key={breed.id}
+                href={`/breeds/${breed?.breeds[0].id}`}
+              >
                 <Image
                   src={breed.url}
                   alt="cat image"
                   width={300}
                   height={140}
-                  className="rounded-[10px]"
+                  className="rounded-[10px] object-cover"
                 />
                 <div className="absolute inset-0 flex items-end justify-center bg-[#FF868E99] text-secondary opacity-0 hover:opacity-100 transition-opacity duration-300 p-[10px]">
                   <span className="bg-white py-[5px] px-[42px] rounded-[10px]">
                     {breed.breeds[0].name}
                   </span>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

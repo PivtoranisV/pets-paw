@@ -25,6 +25,14 @@ export const fetchBreedsCats = async (limit) => {
   return data;
 };
 
+export const fetchBreedId = async (breedId) => {
+  const response = await fetch(
+    `https://api.thecatapi.com/v1/images/search?limit=5&breed_ids=${breedId}&api_key==${apiKey}`
+  );
+  const data = await response.json();
+  return data;
+};
+
 export const fetchBreeds = async () => {
   const response = await fetch(
     'https://api.thecatapi.com/v1/breeds?api_key=' + apiKey
