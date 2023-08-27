@@ -7,7 +7,6 @@ import SearchBar from '@/components/SearchBar';
 import ImageLoader from '@/components/ImageLoader';
 import arrow from '../../public/arrowLeft.svg';
 import { fetchBreedsCats } from '@/util';
-import { fetchBreeds } from '@/util';
 import FilterBreeds from '@/components/FilterBreeds';
 
 const Breeds = () => {
@@ -33,6 +32,14 @@ const Breeds = () => {
     fetchCats();
   }, [selectedLimit]);
 
+  const filteredBreedCats = breedCats?.filter((breed) => {
+    if (!selectedBreed) {
+      return true;
+    }
+    const breedName = breed.breeds[0].name.toLowerCase();
+    return breedName.includes(selectedBreed.toLowerCase());
+  });
+
   return (
     <div className="ml-[108px] mt-[30px]">
       <SearchBar />
@@ -56,7 +63,7 @@ const Breeds = () => {
         <div className="mt-[25px]">
           <ImageLoader isLoading={isLoading} />
           <div className="grid grid-cols-3 gap-5">
-            {breedCats?.map((breed) => (
+            {filteredBreedCats?.map((breed) => (
               <Image
                 src={breed.url}
                 key={breed.id}
