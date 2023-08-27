@@ -6,10 +6,13 @@ import sortUp from '../public/sorting-up.svg';
 import sortDown from '../public/sorting-down.svg';
 import { fetchBreeds } from '@/util';
 
-const FilterBreeds = () => {
+const FilterBreeds = ({
+  selectedLimit,
+  setSelectedLimit,
+  selectedBreed,
+  setSelectedBreed,
+}) => {
   const [breeds, setBreeds] = useState([]);
-  const [selectedBreed, setSelectedBreed] = useState('');
-  const [selectedLimit, setSelectedLimit] = useState('');
 
   useEffect(() => {
     const fetchAllBreeds = async () => {

@@ -15,12 +15,14 @@ const Breeds = () => {
 
   const [breedCats, setBreedCats] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedBreed, setSelectedBreed] = useState('');
+  const [selectedLimit, setSelectedLimit] = useState('5');
 
   useEffect(() => {
     setIsLoading(true);
     const fetchCats = async () => {
       try {
-        const breedData = await fetchBreedsCats();
+        const breedData = await fetchBreedsCats(selectedLimit);
         setBreedCats(breedData);
       } catch (error) {
         console.error('Error fetching cat:', error);
@@ -29,7 +31,7 @@ const Breeds = () => {
       }
     };
     fetchCats();
-  }, []);
+  }, [selectedLimit]);
 
   return (
     <div className="ml-[108px] mt-[30px]">
@@ -44,7 +46,12 @@ const Breeds = () => {
           <div className="h-[40px] w-[146px] rounded-[10px] flex flex-col items-center justify-center bg-secondary">
             <span className="text-base font-medium tracking-[2px]">BREEDS</span>
           </div>
-          <FilterBreeds />
+          <FilterBreeds
+            selectedBreed={selectedBreed}
+            setSelectedBreed={setSelectedBreed}
+            selectedLimit={selectedLimit}
+            setSelectedLimit={setSelectedLimit}
+          />
         </div>
         <div className="mt-[25px]">
           <ImageLoader isLoading={isLoading} />
