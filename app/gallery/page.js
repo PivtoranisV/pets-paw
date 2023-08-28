@@ -6,24 +6,23 @@ import { useState, useEffect } from 'react';
 import SearchBar from '@/components/SearchBar';
 import ImageLoader from '@/components/ImageLoader';
 import arrow from '../../public/arrowLeft.svg';
-import { fetchBreedsCats } from '@/util';
+import { fetchGalleryCats } from '@/util';
 import GalleryForm from '@/components/GalleryForm';
-import Link from 'next/link';
+
+const apiKey = process.env.NEXT_PUBLIC_API_KEY;
 
 const Gallery = () => {
   const router = useRouter();
 
-  const [breedCats, setBreedCats] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [selectedBreed, setSelectedBreed] = useState('');
-  const [selectedLimit, setSelectedLimit] = useState('5');
+  const [modification, setModification] = useState(null);
 
   useEffect(() => {
     setIsLoading(true);
     const fetchCats = async () => {
       try {
-        const breedData = await fetchBreedsCats(selectedLimit);
-        setBreedCats(breedData);
+        const breedData = await fetchGalleryCats();
+        setModification(breedData);
       } catch (error) {
         console.error('Error fetching cat:', error);
       } finally {
@@ -31,15 +30,15 @@ const Gallery = () => {
       }
     };
     fetchCats();
-  }, [selectedLimit]);
+  }, []);
 
-  const filteredBreedCats = breedCats?.filter((breed) => {
-    if (!selectedBreed) {
-      return true;
-    }
-    const breedName = breed.breeds[0].name.toLowerCase();
-    return breedName.includes(selectedBreed.toLowerCase());
-  });
+  const handleModifications = async (breedId, order, type, limit) => {
+    const response = await fetch(
+      `https://api.thecatapi.com/v1/images/search?limit=${limit}&breed_ids=${breedId}&order=${order}&mime_types=${type}&api_key=${apiKey}`
+    );
+    const data = await response.json();
+    setModification(data);
+  };
 
   return (
     <div className="ml-[108px] mt-[30px]">
@@ -57,16 +56,12 @@ const Gallery = () => {
             </span>
           </div>
         </div>
-        <GalleryForm />
+        <GalleryForm onModification={handleModifications} />
         <div className="mt-[25px]">
           <ImageLoader isLoading={isLoading} />
           <div className="grid grid-cols-3 gap-5">
-            {filteredBreedCats?.map((breed) => (
-              <Link
-                className="relative"
-                key={breed.id}
-                href={`/breeds/${breed?.breeds[0].id}`}
-              >
+            {modification?.map((breed) => (
+              <div className="relative" key={breed.id}>
                 <Image
                   src={breed.url}
                   alt="cat image"
@@ -74,12 +69,7 @@ const Gallery = () => {
                   height={140}
                   className="rounded-[10px] object-cover"
                 />
-                <div className="absolute inset-0 flex items-end justify-center bg-[#FF868E99] text-secondary opacity-0 hover:opacity-100 transition-opacity duration-300 p-[10px]">
-                  <span className="bg-white py-[5px] px-[42px] rounded-[10px]">
-                    {breed.breeds[0].name}
-                  </span>
-                </div>
-              </Link>
+              </div>
             ))}
           </div>
         </div>

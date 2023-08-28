@@ -9,6 +9,18 @@ export const getCurrentTime = () => {
 };
 const apiKey = process.env.NEXT_PUBLIC_API_KEY;
 
+export const fetchGalleryCats = async (
+  breedId = '',
+  limit = 5,
+  order = 'rand',
+  type = 'jpg'
+) => {
+  const response = await fetch(
+    `https://api.thecatapi.com/v1/images/search?limit=${limit}&breed_ids=${breedId}&order=${order}&mime_types=${type}&api_key=${apiKey}`
+  );
+  const data = await response.json();
+  return data;
+};
 export const fetchCat = async () => {
   const response = await fetch(
     'https://api.thecatapi.com/v1/images/search?has_breeds=1&api_key=' + apiKey
