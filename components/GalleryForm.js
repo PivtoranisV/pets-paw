@@ -28,7 +28,6 @@ const GalleryForm = ({ onModification }) => {
     e.preventDefault();
 
     onModification(breed, order, type, limit);
-    console.log(breed, order, type, limit);
   };
 
   return (

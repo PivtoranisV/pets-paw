@@ -26,7 +26,7 @@ const Navbar = () => {
           Lets start using The Cat API
         </p>
       </div>
-      <div className="flex gap-4">
+      <nav className="flex gap-4">
         <Link href="/voting" className="flex flex-col gap-[10px]">
           <div
             className={`bg-[#B4B7FF] h-[198px] w-[138px] border-solid border-4 rounded-[20px] flex flex-col items-center justify-center hover:border-white ${
@@ -111,7 +111,7 @@ const Navbar = () => {
             </span>
           </div>
         </Link>
-      </div>
+      </nav>
     </header>
   );
 };

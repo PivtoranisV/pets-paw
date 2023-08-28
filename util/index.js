@@ -99,3 +99,11 @@ export const sendFavorite = async (imageId) => {
     console.error('Error:', error);
   }
 };
+
+export const fetchFavorites = async () => {
+  const response = await fetch(
+    'https://api.thecatapi.com/v1/favourites?api_key=' + apiKey
+  );
+  const data = await response.json();
+  return data;
+};
