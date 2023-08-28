@@ -6,20 +6,20 @@ import { useState, useEffect } from 'react';
 import SearchBar from '@/components/SearchBar';
 import ImageLoader from '@/components/ImageLoader';
 import arrow from '../../public/arrowLeft.svg';
-import { fetchFavorites } from '@/util';
+import { fetchVotes } from '@/util';
 
-const Favorite = () => {
+const Likes = () => {
   const router = useRouter();
 
-  const [favoritesCats, setFavoritesCats] = useState(null);
+  const [voteCats, setVoteCats] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
     const fetchCats = async () => {
       try {
-        const breedData = await fetchFavorites();
-        setFavoritesCats(breedData);
+        const breedData = await fetchVotes();
+        setVoteCats(breedData);
       } catch (error) {
         console.error('Error fetching cat:', error);
       } finally {
@@ -28,6 +28,8 @@ const Favorite = () => {
     };
     fetchCats();
   }, []);
+
+  const likedCats = voteCats?.filter((cat) => cat.value === 1);
 
   return (
     <div className="ml-[108px] mt-[30px]">
@@ -40,15 +42,13 @@ const Favorite = () => {
             </div>
           </button>
           <div className="h-[40px] w-[146px] rounded-[10px] flex flex-col items-center justify-center bg-secondary">
-            <span className="text-base font-medium tracking-[2px]">
-              FAVORITES
-            </span>
+            <span className="text-base font-medium tracking-[2px]">LIKES</span>
           </div>
         </div>
         <div className="mt-[25px]">
           <ImageLoader isLoading={isLoading} />
           <div className="grid grid-cols-3 gap-5">
-            {favoritesCats?.map((cat) => (
+            {likedCats?.map((cat) => (
               <div className="relative" key={cat.image.id}>
                 <Image
                   src={cat.image.url}
@@ -66,4 +66,4 @@ const Favorite = () => {
   );
 };
 
-export default Favorite;
+export default Likes;

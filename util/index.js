@@ -107,3 +107,10 @@ export const fetchFavorites = async () => {
   const data = await response.json();
   return data;
 };
+export const fetchVotes = async () => {
+  const response = await fetch(
+    'https://api.thecatapi.com/v1/votes?api_key=' + apiKey
+  );
+  const data = await response.json();
+  return data;
+};
