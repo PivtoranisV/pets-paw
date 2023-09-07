@@ -56,7 +56,8 @@ const BreedDetail = ({ params }) => {
             showThumbs={false}
             showStatus={false}
             infiniteLoop={true}
-            showArrows={false}
+            showArrows={true}
+            keyboardControl={true}
           >
             {breedDetails?.map((breed) => (
               <div

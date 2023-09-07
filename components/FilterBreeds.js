@@ -35,7 +35,7 @@ const FilterBreeds = ({
       >
         <option value="">All Breeds</option>
         {breeds.map((breed) => (
-          <option key={breed.id} value={breed.name}>
+          <option key={breed.id} value={breed.id}>
             {breed.name}
           </option>
         ))}

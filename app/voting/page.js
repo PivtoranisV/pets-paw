@@ -51,7 +51,7 @@ const Voting = () => {
                 src={randomCat.url}
                 fill
                 alt="cat"
-                className="object-cover"
+                className="object-contain"
               />
             )}
           </div>

@@ -13,10 +13,10 @@ const Navbar = () => {
 
   return (
     <header className="flex flex-col pl-[147px] pt-[30px] fixed left-0 top-0">
-      <div className="flex gap-2">
+      <Link href="/" className="flex gap-2">
         <Image src={logo} alt="logo" />
         <Image src={petsPaw} alt="logo" />
-      </div>
+      </Link>
       <div className="mt-20">
         <h1 className="text-lg font-medium">Hi!👋</h1>
         <p className="text-primary text-base">

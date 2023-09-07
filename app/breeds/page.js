@@ -22,7 +22,7 @@ const Breeds = () => {
     setIsLoading(true);
     const fetchCats = async () => {
       try {
-        const breedData = await fetchBreedsCats(selectedLimit);
+        const breedData = await fetchBreedsCats(selectedLimit, selectedBreed);
         setBreedCats(breedData);
       } catch (error) {
         console.error('Error fetching cat:', error);
@@ -31,15 +31,7 @@ const Breeds = () => {
       }
     };
     fetchCats();
-  }, [selectedLimit]);
-
-  const filteredBreedCats = breedCats?.filter((breed) => {
-    if (!selectedBreed) {
-      return true;
-    }
-    const breedName = breed.breeds[0].name.toLowerCase();
-    return breedName.includes(selectedBreed.toLowerCase());
-  });
+  }, [selectedLimit, selectedBreed]);
 
   return (
     <div className="ml-[108px] mt-[30px]">
@@ -64,17 +56,17 @@ const Breeds = () => {
         <div className="mt-[25px]">
           <ImageLoader isLoading={isLoading} />
           <div className="grid grid-cols-3 gap-5">
-            {filteredBreedCats?.map((breed) => (
+            {breedCats?.map((breed) => (
               <Link
-                className="relative"
+                className="relative h-44"
                 key={breed.id}
                 href={`/breeds/${breed?.breeds[0].id}`}
               >
                 <Image
                   src={breed.url}
                   alt="cat image"
-                  width={300}
-                  height={140}
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   className="rounded-[10px] object-cover"
                 />
                 <div className="absolute inset-0 flex items-end justify-center bg-[#FF868E99] text-secondary opacity-0 hover:opacity-100 transition-opacity duration-300 p-[10px]">

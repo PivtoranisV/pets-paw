@@ -98,7 +98,10 @@ const GalleryForm = ({ onModification }) => {
             <option value={20}>20 items per page</option>
           </select>
         </div>
-        <button type="submit" className="bg-[#1D1D1D] rounded-[10px]">
+        <button
+          type="submit"
+          className="bg-[#1D1D1D] rounded-[10px] hover:bg-[#FF868E33]"
+        >
           <div className="w-10 h-10 flex items-center justify-center">
             <Image src={reloadIcon} alt="reload icon" />
           </div>

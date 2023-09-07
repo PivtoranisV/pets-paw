@@ -6,20 +6,23 @@ import { useState, useEffect } from 'react';
 import SearchBar from '@/components/SearchBar';
 import ImageLoader from '@/components/ImageLoader';
 import arrow from '../../public/arrowLeft.svg';
-import { fetchVotes } from '@/util';
+import { fetchBreedsCats } from '@/util';
+import Link from 'next/link';
 
-const Dislikes = () => {
+const Search = () => {
   const router = useRouter();
 
-  const [voteCats, setVoteCats] = useState(null);
+  const [breedCats, setBreedCats] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedBreed, setSelectedBreed] = useState('');
+  const [selectedLimit, setSelectedLimit] = useState('5');
 
   useEffect(() => {
     setIsLoading(true);
     const fetchCats = async () => {
       try {
-        const breedData = await fetchVotes();
-        setVoteCats(breedData);
+        const breedData = await fetchBreedsCats(selectedLimit, selectedBreed);
+        setBreedCats(breedData);
       } catch (error) {
         console.error('Error fetching cat:', error);
       } finally {
@@ -27,9 +30,7 @@ const Dislikes = () => {
       }
     };
     fetchCats();
-  }, []);
-
-  const dislikedCats = voteCats?.filter((cat) => cat.value === 0);
+  }, [selectedLimit, selectedBreed]);
 
   return (
     <div className="ml-[108px] mt-[30px]">
@@ -42,23 +43,31 @@ const Dislikes = () => {
             </div>
           </button>
           <div className="h-[40px] w-[146px] rounded-[10px] flex flex-col items-center justify-center bg-secondary">
-            <span className="text-base font-medium tracking-[2px]">
-              DISLIKES
-            </span>
+            <span className="text-base font-medium tracking-[2px]">SEARCH</span>
           </div>
         </div>
         <div className="mt-[25px]">
           <ImageLoader isLoading={isLoading} />
           <div className="grid grid-cols-3 gap-5">
-            {dislikedCats?.map((cat) => (
-              <div className="relative h-44" key={cat.image.id}>
+            {breedCats?.map((breed) => (
+              <Link
+                className="relative h-44"
+                key={breed.id}
+                href={`/breeds/${breed?.breeds[0].id}`}
+              >
                 <Image
-                  src={cat.image.url}
+                  src={breed.url}
                   alt="cat image"
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   className="rounded-[10px] object-cover"
                 />
-              </div>
+                <div className="absolute inset-0 flex items-end justify-center bg-[#FF868E99] text-secondary opacity-0 hover:opacity-100 transition-opacity duration-300 p-[10px]">
+                  <span className="bg-white py-[5px] px-[42px] rounded-[10px]">
+                    {breed.breeds[0].name}
+                  </span>
+                </div>
+              </Link>
             ))}
           </div>
         </div>
@@ -67,4 +76,4 @@ const Dislikes = () => {
   );
 };
 
-export default Dislikes;
+export default Search;

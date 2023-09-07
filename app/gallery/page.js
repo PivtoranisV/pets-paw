@@ -61,12 +61,11 @@ const Gallery = () => {
           <ImageLoader isLoading={isLoading} />
           <div className="grid grid-cols-3 gap-5">
             {modification?.map((breed) => (
-              <div className="relative" key={breed.id}>
+              <div className="relative h-44" key={breed.id}>
                 <Image
                   src={breed.url}
                   alt="cat image"
-                  width={300}
-                  height={140}
+                  fill
                   className="rounded-[10px] object-cover"
                 />
               </div>

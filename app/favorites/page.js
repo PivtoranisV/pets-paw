@@ -49,12 +49,11 @@ const Favorite = () => {
           <ImageLoader isLoading={isLoading} />
           <div className="grid grid-cols-3 gap-5">
             {favoritesCats?.map((cat) => (
-              <div className="relative" key={cat.image.id}>
+              <div className="relative h-44" key={cat.image.id}>
                 <Image
                   src={cat.image.url}
                   alt="cat image"
-                  width={300}
-                  height={140}
+                  fill
                   className="rounded-[10px] object-cover"
                 />
               </div>
